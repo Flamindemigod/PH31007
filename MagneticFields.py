@@ -11,4 +11,3 @@ class MagneticFieldAroundWire(ThreeDScene):
         self.wait(5.2)
         self.stop_ambient_camera_rotation()
 
-#        self.play(field.animate.rotate(90*DEGREES, about_point=ORIGIN), run_time=1, rate_func=rate_functions.linear)
