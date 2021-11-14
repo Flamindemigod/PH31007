@@ -133,7 +133,11 @@ dmypy.json
 /custom_config.yml
 /media/*
 
+#PremierPro AutoSaves
+Adobe Premiere Pro Auto-Save
+
 #Inclusion Rules
 #Project Assets
 !/media/Assets
 !/media/Scenes
+
