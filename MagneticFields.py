@@ -3,6 +3,8 @@ from manim_physics import *
 
 class MagneticFieldAroundWire(ThreeDScene):
     def construct(self):
+        config.frame_height = 15
+        config.frame_width = 15
         current1 = Current(magnitude=10)
         field = CurrentMagneticField(current1)
         self.add(current1, field)
