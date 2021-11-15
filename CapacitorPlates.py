@@ -3,7 +3,8 @@ import random
 """ 
 ‘But an issue became clear, he couldn’t account for the apparently induced current across unconnected capacitor plates – something was missing.’
  """
-
+#TODO
+## Fade the vectors a bit faster
 class CapacitorPlates(ThreeDScene):
     def construct(self):
         self.set_camera_orientation(phi=15 * DEGREES, theta=-45 * DEGREES, gamma=45 * DEGREES)
@@ -25,8 +26,8 @@ class CapacitorPlates(ThreeDScene):
 
         vec=VGroup()
         for i in range(10):
-            vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/10).shift(0.5*LEFT))
-            vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/10).shift(0.5*LEFT))
+            vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/10).shift(random.random()*0.5*LEFT))
+            vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/10).shift(random.random()*0.5*LEFT))
 
         self.play(FadeIn(vec),
                 vec.animate.shift(0.5*RIGHT), rate_func=rate_functions.linear)
