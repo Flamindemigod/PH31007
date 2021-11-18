@@ -70,14 +70,27 @@ class DisplayCurl(Scene):
     def construct(self):
         MagneticField = Circle(radius=1, color=RED_B)
         MagneticFieldLabel = MathTex(r"\vec{B}.\vec{dl}")
-        MagField = VGroup(MagneticField, MagneticFieldLabel).arrange(DOWN)
+        MagneticField_arrow = Cone(direction=X_AXIS, show_base=False, base_radius=0.05, height=0.1).shift(DOWN)
+        MagneticField_group = VGroup(MagneticField, MagneticField_arrow)       
+        MagField = VGroup(MagneticField_group, MagneticFieldLabel).arrange(DOWN)
 
         
         CurlMagneticField = Circle(radius=1, color=BLUE_B, fill_opacity=0.3)
         CurlMagneticFieldLabel = MathTex(r"\nabla\times\textbf{B}")
-        CurlMagField = VGroup(CurlMagneticField, CurlMagneticFieldLabel).arrange(DOWN)
+        CurlMagneticField_arrow = Cone(direction=X_AXIS, show_base=False, base_radius=0.05, height=0.1).shift(DOWN)
+        CurlMagneticField_group = VGroup(CurlMagneticField, CurlMagneticField_arrow)       
+        CurlMagField = VGroup(CurlMagneticField_group, CurlMagneticFieldLabel).arrange(DOWN)
 
         VGroup(MagField, CurlMagField).arrange(RIGHT, buff=2)
-        self.play(Write(MagField), Write(CurlMagField), run_time = 3, rate_func=rate_functions.smooth)
-
+        self.play(
+            Write(VGroup(MagneticField, CurlMagneticField)), 
+            Write(VGroup(MagneticFieldLabel, CurlMagneticFieldLabel)),
+            run_time = 3, rate_func=rate_functions.smooth)
+        self.play(FadeIn(MagneticField_arrow),
+                FadeIn(CurlMagneticField_arrow))
+        self.play(
+            Rotate(MagneticField_group, angle=2*PI, about_point=MagneticField.get_center()),
+            Rotate(CurlMagneticField_group, angle=2*PI, about_point=CurlMagneticField.get_center()),
+            run_time=3, rate_func=rate_functions.linear)
+        self.wait()
         
