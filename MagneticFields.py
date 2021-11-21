@@ -1,6 +1,7 @@
 from manim import *
 from manim_physics import *
 import random
+import manim_physics
 
 class MagneticFieldAroundWire(ThreeDScene):
     def construct(self):
@@ -94,3 +95,32 @@ class DisplayCurl(Scene):
             run_time=3, rate_func=rate_functions.linear)
         self.wait()
         
+class MagneticField(ThreeDScene):
+    def construct(self):
+        config.frame_height = 15
+        config.frame_width = 15
+        
+        bar1 = BarMagnet().rotate(PI / 2).shift(LEFT * 3.5).scale(0.8)
+        bar2 = BarMagnet().rotate(-PI / 2).shift(RIGHT * 3.5).scale(0.8)
+        
+        field = manim_physics.BarMagneticField(bar1, bar2)
+        self.play(FadeIn(field),
+                FadeIn(bar1, bar2))
+        
+        _bar1 = bar1.copy()
+        _bar2 = bar2.copy()
+        for _ in range(5):
+            step=0.3
+            
+            _bar1 = _bar1.rotate(step*random.random()*PI/2).shift(step*random.random()*DOWN, step*random.random()*LEFT, step*random.random()*UP)
+            _bar2 = _bar2.rotate(step*random.random()*PI/2).shift(step*random.random()*DOWN, step*random.random()*RIGHT, step*random.random()*UP)
+
+            
+            _field = manim_physics.BarMagneticField(_bar1, _bar2)
+            
+            
+            self.play(
+                Transform(bar1, _bar1),
+                Transform(bar2, _bar2),
+                Transform(field, _field), run_time=0.7)
+            self.wait(0.3)
