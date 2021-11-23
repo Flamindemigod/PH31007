@@ -84,11 +84,11 @@ class DisplayCurl(Scene):
 
         VGroup(MagField, CurlMagField).arrange(RIGHT, buff=2)
         self.play(
-            Write(VGroup(MagneticField, CurlMagneticField)), 
-            Write(VGroup(MagneticFieldLabel, CurlMagneticFieldLabel)),
+            Create(VGroup(MagneticField, CurlMagneticField)), 
+            Create(VGroup(MagneticFieldLabel, CurlMagneticFieldLabel)),
             run_time = 3, rate_func=rate_functions.smooth)
-        self.play(FadeIn(MagneticField_arrow),
-                FadeIn(CurlMagneticField_arrow))
+        self.play(Create(MagneticField_arrow),
+                Create(CurlMagneticField_arrow))
         self.play(
             Rotate(MagneticField_group, angle=2*PI, about_point=MagneticField.get_center()),
             Rotate(CurlMagneticField_group, angle=2*PI, about_point=CurlMagneticField.get_center()),
