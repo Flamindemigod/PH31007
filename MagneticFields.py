@@ -54,16 +54,16 @@ class CapacitorMagneticField(ThreeDScene):
             vec=VGroup()
             _vec_range = 50
             for i in range(_vec_range):
-                vec.add(Vector(CapPlate1.get_center()-CapPlate2.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*LEFT))
-                vec.add(Vector(CapPlate1.get_center()-CapPlate2.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*LEFT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
                 
-                vec.add(Vector(CapPlate1.get_center()-CapPlate2.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*LEFT))
-                vec.add(Vector(CapPlate1.get_center()-CapPlate2.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*LEFT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
 
-            vec.shift(OUT*1.2)
+            #vec.shift(IN*1.2)
             self.play(FadeIn(vec),
-                    vec.animate.shift(0.4*IN), rate_func=rate_functions.linear, run_time=0.6*3)
-            self.play(FadeOut(vec, shift=0.2*IN), rate_func=rate_functions.linear, run_time=0.3*3)
+                    vec.animate.shift(0.4*OUT), rate_func=rate_functions.linear, run_time=0.6*3)
+            self.play(FadeOut(vec, shift=0.2*OUT), rate_func=rate_functions.linear, run_time=0.3*3)
             self.wait(0.5)
         self.stop_ambient_camera_rotation()
 
@@ -124,3 +124,43 @@ class MagneticField(ThreeDScene):
                 Transform(bar2, _bar2),
                 Transform(field, _field), run_time=0.7)
             self.wait(0.3)
+
+class WireAndCapacitorMagneticField(ThreeDScene):
+    def construct(self):
+        config.frame_height = 30
+        config.frame_width = 30
+        self.set_camera_orientation(phi=40 * DEGREES, theta=-30 * DEGREES, gamma=40 * DEGREES)
+        #self.set_camera_orientation(phi=90 * DEGREES)
+        
+        CapPlate1 = Rectangle(height=4, width=4, color=BLUE_B,grid_xstep=0.1, grid_ystep=0.1).rotate(90*DEGREES, axis=Y_AXIS)
+        CapPlate2 = Rectangle(height=4, width=4, color=BLUE_C,grid_xstep=0.1, grid_ystep=0.1).rotate(90*DEGREES, axis=Y_AXIS).shift(RIGHT)
+        
+        CapPlates = VGroup(CapPlate1, CapPlate2)
+
+        wire1 = Line(20*LEFT, [0,0,0]).set_color(BLUE_B)
+        wire2 = Line(RIGHT, 15*RIGHT).set_color(BLUE_B)
+        capacitor = VGroup(CapPlates,wire2,wire1).shift(10*RIGHT).rotate_about_origin(-90*DEGREES, axis=Y_AXIS)
+        current = Current(magnitude=10)
+        field = CurrentMagneticField(current)
+        self.begin_ambient_camera_rotation(rate=-0.2)
+        self.play(
+            Write(capacitor, reverse=True, rate_func=rate_functions.smooth),
+            FadeIn(field), run_time = 2)
+        self.wait(2)
+        self.play(capacitor.animate.shift(10*IN), run_time=5, rate_func=rate_functions.ease_out_cubic)
+        for _ in range(5):
+            vec=VGroup()
+            _vec_range = 50
+            for i in range(_vec_range):
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*LEFT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*UP/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
+                
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*LEFT))
+                vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
+
+            vec.shift(OUT*1.2)
+            self.play(FadeIn(vec),
+                    vec.animate.shift(0.4*IN), rate_func=rate_functions.linear, run_time=0.6*3)
+            self.play(FadeOut(vec, shift=0.2*IN), rate_func=rate_functions.linear, run_time=0.3*3)
+            self.wait(0.5)
+        self.stop_ambient_camera_rotation()
