@@ -158,9 +158,8 @@ class WireAndCapacitorMagneticField(ThreeDScene):
                 vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*LEFT))
                 vec.add(Vector(CapPlate2.get_center()-CapPlate1.get_center(), buff=0.3).shift(i*DOWN/(_vec_range/2)).shift(random.random()*1.8*RIGHT))
 
-            vec.shift(OUT*1.2)
             self.play(FadeIn(vec),
-                    vec.animate.shift(0.4*IN), rate_func=rate_functions.linear, run_time=0.6*3)
-            self.play(FadeOut(vec, shift=0.2*IN), rate_func=rate_functions.linear, run_time=0.3*3)
+                    vec.animate.shift(0.4*OUT), rate_func=rate_functions.linear, run_time=0.6*3)
+            self.play(FadeOut(vec, shift=0.2*OUT), rate_func=rate_functions.linear, run_time=0.3*3)
             self.wait(0.5)
         self.stop_ambient_camera_rotation()
