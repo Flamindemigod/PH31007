@@ -37,6 +37,7 @@ class CapacitorwithEfield(ThreeDScene):
         self.play(FadeIn(wire_current_group),
                 wire_current_group.animate.shift(1.5*RIGHT), run_time=1.5, rate_func=rate_functions.linear)
         self.play(FadeOut(wire_current_group, shift = (1.5*RIGHT)), run_time=1.5, rate_func=rate_functions.linear)
+        self.play(FadeOut(CapPlates, wire1, wire2))
 
 class CapacitorwithnoEfield(ThreeDScene):
     def construct(self):
@@ -70,3 +71,5 @@ class CapacitorwithnoEfield(ThreeDScene):
         self.play(FadeIn(wire_current_group),
                 wire_current_group.animate.shift(1.5*RIGHT), run_time=1.5, rate_func=rate_functions.linear)
         self.play(FadeOut(wire_current_group, shift = (1.5*RIGHT)), run_time=1.5, rate_func=rate_functions.linear)
+        self.play(FadeOut(CapPlates, wire1, wire2))
+
