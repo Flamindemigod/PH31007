@@ -1,6 +1,6 @@
 from manim import *
 
-class Equation(Scene):
+class AME(Scene):
   
     def construct(self):
         title = Tex(r"Ampere-Maxwell equation")
@@ -25,5 +25,41 @@ class Equation(Scene):
             )
         self.remove(AMEqn)
         self.play(AmpEqn.animate.move_to(title).shift(DOWN))
+        self.wait()
+        return
+
+class GaussDivergence(Scene):
+    def construct(self):
+        GDTEqn = MathTex(r"\iiint_V (\nabla\cdot \vec{F} ) dV", r"=", r"\oiint_S (F\cdot\hat{n})dS")
+        title = Tex(r"Gauss Divergence Theorem")
+        VGroup(GDTEqn, title).arrange(DOWN)
+
+        
+        self.play(
+            Write(title)
+        )
+        self.play(FadeIn(GDTEqn, shift=DOWN))
+        self.wait(3)
+        self.play(
+            FadeOut(GDTEqn),
+            Unwrite(title))
+        self.wait()
+        return
+
+class StokesTheorem(Scene):
+    def construct(self):
+        STEqn = MathTex(r"\iint_\Sigma (\nabla\times A ) \cdot a", r"=", r"\oint_{\delta\Sigma} A\cdot dl")
+        title = Tex(r"Stokes' theorem")
+        VGroup(STEqn, title).arrange(DOWN)
+
+        
+        self.play(
+            Write(title)
+        )
+        self.play(FadeIn(STEqn, shift=DOWN))
+        self.wait(3)
+        self.play(
+            FadeOut(STEqn),
+            Unwrite(title))
         self.wait()
         return
