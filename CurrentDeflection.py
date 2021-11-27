@@ -17,8 +17,11 @@ class CurrentDeflection(ThreeDScene):
 
 
         img = ImageMobject("media/Assets/ampere.png")
-        self.play(FadeIn(img, shift=IN))
+        imgLabel = Tex("André-Marie Ampère")
+        imgLabel.move_to(img.get_bottom()).shift(0.5*DOWN)
+        self.play(FadeIn(img, shift=IN), Write(imgLabel))
         self.wait(2)
+        self.play(Unwrite(imgLabel))
         self.play(img.animate.to_corner(UP+LEFT).shift(DOWN+RIGHT), rate_func=rate_functions.ease_in_out_cubic, run_time=2)
 
         #Wire
