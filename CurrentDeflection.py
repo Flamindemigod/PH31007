@@ -1,6 +1,4 @@
 from manim import *
-from manim.utils.rate_functions import ease_out_sine
-from manim_physics.rigid_mechanics import step
 import numpy as np
 import textwrap
 
