@@ -166,3 +166,29 @@ class Maxwell4(Scene):
             Unwrite(title))
         self.wait()
         return
+
+class AllMaxwell(Scene):
+    def construct(self):
+        title = Tex(r"Maxwell's equations")
+        Eqn1 = MathTex(r"\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}")
+        Eqn2 = MathTex(r"\nabla \cdot \mathbf{B} = 0")
+        Eqn3 = MathTex(r"\nabla \times \mathbf{E} = \frac{\delta\mathbf{B}}{\delta t}")
+        Eqn4 = MathTex(r"\nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\delta\mathbf{E}}{\delta t}")
+        VGroup(title, Eqn1, Eqn2, Eqn3, Eqn4).arrange(DOWN)
+
+        
+        self.play(
+            Write(title)
+        )
+        self.play(
+            Write(Eqn1),
+            Write(Eqn2),
+            Write(Eqn3),
+            Write(Eqn4),
+            )
+        self.wait(5)
+        self.play(
+            FadeOut(Eqn1, Eqn2, Eqn3, Eqn4),
+            Unwrite(title))
+        self.wait()
+        return
