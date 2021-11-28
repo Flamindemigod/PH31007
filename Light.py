@@ -53,4 +53,4 @@ class Light(ThreeDScene):
         #self.add(text)
         self.begin_ambient_camera_rotation(rate=-0.01, about="theta")
         self.add(Electric, Magnetic)
-        self.play(tracker.animate.set_value(TAU), run_time=6, rate_func=linear)
+        self.play(tracker.animate.set_value(TAU), run_time=15, rate_func=linear)
